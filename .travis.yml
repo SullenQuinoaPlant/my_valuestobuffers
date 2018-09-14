@@ -1,0 +1,12 @@
+language: c
+os:
+ - linux
+# - osx
+install:
+ - INSTALL_HERE="$(pwd)/libs"
+ - LIBS_I="$INSTALL_HERE""/includes"
+ - LIBS_L="$INSTALL_HERE""/objects"
+ - . .travis/install_cmocka.sh
+script:
+ - make
+ - make tests
