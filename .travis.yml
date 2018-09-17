@@ -1,12 +1,8 @@
 language: c
 os:
  - linux
-# - osx
 install:
- - INSTALL_HERE="$(pwd)/libs"
- - LIBS_I="$INSTALL_HERE""/includes"
- - LIBS_L="$INSTALL_HERE""/objects"
- - . .travis/install_cmocka.sh
+ - make build_dependencies
 script:
  - make
  - make tests
