@@ -10,16 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char const *const	g_vtb_oct_syms = "01234567";
-char const *const	g_vtb_dec_syms = "0123456789";
-char const *const	g_vtb_hex_syms = "0123456789abcdef";
-char const *const	g_vtb_bhex_syms = "0123456789ABCDEF";
-char const *const	g_vtb_rawhex =\
-	(char[]){
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+#include "myvaltobuffers.h"
 
-t_s_bd const		g_vtb_oct = {g_vtb_oct_syms, 8};
-t_s_bd const		g_vtb_dec = {g_vtb_dec_syms, 10};
-t_s_bd const		g_vtb_hex = {g_vtb_hex_syms, 16};
-t_s_bd const		g_vtb_bhex = {g_vtb_bhex_syms, 16};
-t_s_bd const		g_vtb_0x10 = {g_vtb_rawhex, 16};
+t_s_vtb_bd const	g_vtb_oct = {VTB_OCT_SYMS, 8};
+t_s_vtb_bd const	g_vtb_dec = {VTB_DEC_SYMS, 10};
+t_s_vtb_bd const	g_vtb_hex = {VTB_HEX_SYMS, 16};
+t_s_vtb_bd const	g_vtb_bhex = {VTB_BHEX_SYMS, 16};
+t_s_vtb_bd const	g_vtb_0x10 = {VTB_RAWH, 16};

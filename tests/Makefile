@@ -11,11 +11,14 @@ CFLAGS_UTEST = -fno-builtin -g
 CFLAGS_UTEST += $(CFLAGS_MORE) #$(CFLAGS) were annoying the hell out of me
 
 
+.PHONY : tests_all
+tests_all : clean-tests tests
+
 
 ############
 #BUILD TESTS
 
-.PHONY : build-tests
+.PHONY : build_tests
 build_tests\
 :\
 set_utest_flags def\
@@ -37,7 +40,7 @@ cmocka :
 	@if $(CC) $(CFLAGS_UTEST)\
 		-I $(LIBS_I) -L $(LIBS_L)\
 	 	$(TEST_DIR)/cmocka/check_install.c\
-		-lcmocka -o test.o\
+		-lcmocka_shared -o test.o\
 		-Wl,-rpath=$$(readlink -e $(LIBS_L))\
 		&& ./test.o .;\
 	then\
@@ -57,8 +60,8 @@ $(LIBS_L)/$(LIBNAME).a
 		-I $(LIBS_I) -I $(SRC_DIR)\
 		$<\
 		-L $(LIBS_L)\
-		-lcmocka\
-		-l$(NAME) -lmyfloatingpoint -lft\
+		-lcmocka_shared\
+		-l$(NAME) -lmystupidmath -lft\
 		-o $@\
 		-Wl,-rpath=$$(readlink -e $(LIBS_L))\
 
@@ -87,11 +90,6 @@ run_tests : $(EXECUTION_STAMPS)
 
 ###############
 #MISCELLANEOUS:
-
-.PHONY : all_unit_tests aut
-all_unit_tests aut : clean-tests ut
-
-
 
 .PHONY : clean-tests
 clean-tests :

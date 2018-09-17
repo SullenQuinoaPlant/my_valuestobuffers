@@ -13,7 +13,9 @@
 #ifndef INNER_H
 # define INNER_H
 
+# include <limits.h>
 # include "libft.h"
 # include "libmystupidmath.h"
+# include "myvaltobuffers.h"
 
 #endif

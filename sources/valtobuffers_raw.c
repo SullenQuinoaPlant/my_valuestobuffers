@@ -12,9 +12,9 @@
 
 #include "inner.h"
 
-size_t							my_valtobuffer(
+size_t							vtb_uv_raw(
 	uintmax_t val,
-	t_s_bd const *base,
+	t_s_vtb_bd const *base,
 	char *b_end)
 {
 	unsigned char const	r = base->radius;
@@ -31,7 +31,7 @@ size_t							my_valtobuffer(
 }
 
 /*
-**NOTE ON THE FOLLOWING : (my_lowvaltob)
+**NOTE ON THE FOLLOWING : (vtb_lv_raw)
 **displays values encoded as sums of negative powers of 2
 **	in which alignment must be done on highest order bit
 **	(closest to decimal pivot)
@@ -47,10 +47,10 @@ size_t							my_valtobuffer(
 #define J 1
 #define K 2
 
-size_t							my_lowvaltob(
+size_t							vtb_lv_raw(
 	uintmax_t val,
 	int val_sz,
-	t_s_bd const *base,
+	t_s_vtb_bd const *base,
 	char *b_end)
 {
 	unsigned char const	r = base->radius;
@@ -81,20 +81,20 @@ size_t							my_lowvaltob(
 #undef J
 #undef K
 
-size_t							my_signvaltob(
+size_t							vtb_sv_raw(
 	intmax_t val,
-	t_s_bd const *base,
+	t_s_vtb_bd const *base,
 	char *b_end,
-	t_e_sp sign_f)
+	t_e_vtb_sp sign_f)
 {
 	size_t		i;
 	int			sign;
 
 	sign = val < 0 ? -1 : 1;
-	i = my_valtobuffer((val * sign), base, b_end);
+	i = vtb_uv_raw((val * sign), base, b_end);
 	*(b_end - i) = sign < 0 ? '-' : '+';
-	if (val < 0 || sign_f == e_all ||
-		(val && sign_f == e_abs))
+	if (val < 0 || sign_f == e_vtb_spall ||
+		(val && sign_f == e_vtb_spabs))
 		i++;
 	return (i);
 }

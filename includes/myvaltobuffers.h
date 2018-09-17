@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valtobuffers.h                                     :+:      :+:    :+:   */
+/*   myvaltobuffers.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,16 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_BUFFERS_H
-# define MY_BUFFERS_H
+#ifndef MYVALTOBUFFERS_H
+# define MYVALTOBUFFERS_H
 
+# include <stddef.h>
 # include <stdint.h>
 
-extern char const *const	g_vtb_oct_syms;
-extern char const *const	g_vtb_dec_syms;
-extern char const *const	g_vtb_hex_syms;
-extern char const *const	g_vtb_bhex_syms;
-extern char const *const	g_vtb_rawhex;
+# define VTB_OCT_SYMS "01234567"
+# define VTB_DEC_SYMS "0123456789"
+# define VTB_HEX_SYMS "0123456789abcdef"
+# define VTB_BHEX_SYMS "0123456789ABCDEF"
+# define VTB_RAWH (char[]){0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
 
 typedef struct				s_vtb_base_descriptor
 {
@@ -33,25 +34,22 @@ extern t_s_vtb_bd const		g_vtb_hex;
 extern t_s_vtb_bd const		g_vtb_bhex;
 extern t_s_vtb_bd const		g_vtb_0x10;
 
-# define BIGGEST_BASE2 (sizeof(uintmax_t) * 8)
-# define BIGGEST_SIGNED BIGGEST_BASE2 + 1
-# define BIGGEST_SIGNED_STRING BIGGEST_SIGNED + 1
+# define VTB_BIGGEST_BASE2 (sizeof(uintmax_t) * 8)
+# define VTB_BIGGEST_SIGNED VTB_BIGGEST_BASE2 + 1
+# define VTB_BIGGEST_SIGNED_STRING VTB_BIGGEST_SIGNED + 1
 
-enum						e_vtb_max_buffer_offsets
-{
-	e_vtb_mbo_mib = BIGGEST_SIGNED_STRING - 1,
-};
+# define VTB_MIB_OFFSET VTB_BIGGEST_SIGNED_STRING - 1
 
 /*
 **max int buffer
 */
-typedef char t_mib[BIGGEST_SIGNED_STRING];
+typedef char t_vtb_mib[VTB_BIGGEST_SIGNED_STRING];
 
 typedef enum				e_vtb_sign_policy
 {
-	e_vtb_neg,
-	e_vtb_all,
-	e_vtb_abs
+	e_vtb_spneg,
+	e_vtb_spall,
+	e_vtb_spabs
 }							t_e_vtb_sp;
 
 typedef struct				s_vtb_contiguous_chars
@@ -64,44 +62,38 @@ typedef struct				s_vtb_contiguous_chars
 **only works with bases that are powers of 2,
 **most significant bits set to 0 should be avoided
 */
-t_s_vtb_cc						my_lowv_tob(
-t_s_vtb_cc						vtb_lv_tscc(
-	uintmax_t val,
-	int val_sz,
-	char const * const basestr,
-	t_mib *b);
-
-size_t						my_lowvaltob(
 size_t							vtb_lv_raw(
 		uintmax_t val,
 		int val_sz,
 		t_s_vtb_bd const *base,
 		char *b_end);
 
-size_t						my_signvaltob(
+t_s_vtb_cc						vtb_lv_tscc(
+	uintmax_t val,
+	int val_sz,
+	char const * const basestr,
+	t_vtb_mib *b);
+
 size_t							vtb_sv_raw(
 		intmax_t val,
 		t_s_vtb_bd const *base,
 		char *b_end,
 		t_e_vtb_sp sign_f);
 
-t_s_vtb_cc						my_uv_tob(
-t_s_vtb_cc						vtb_uv_tscc(
-		uintmax_t val,
-		char const * const basestr,
-		t_mib *b);
-
-t_s_vtb_cc						my_v_tob(
-t_s_vtb_cc						vtb_v_tscc(
+t_s_vtb_cc						vtb_sv_tscc(
 		intmax_t val,
 		char const * const basestr,
-		t_mib *b,
+		t_vtb_mib *b,
 		t_e_vtb_sp sign_f);
 
-size_t						my_valtobuffer(
-size_t							vtb_v_raw(
+size_t							vtb_uv_raw(
 		uintmax_t val,
 		t_s_vtb_bd const *base,
 		char *b_end);
+
+t_s_vtb_cc						vtb_uv_tscc(
+		uintmax_t val,
+		char const * const basestr,
+		t_vtb_mib *b);
 
 #endif

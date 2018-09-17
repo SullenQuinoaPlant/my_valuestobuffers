@@ -1,4 +1,4 @@
-NAME =
+NAME = myvaltobuffers
 LIBNAME = lib$(NAME)
 GIT_REPO =
 
@@ -17,7 +17,7 @@ SRCS := $(patsubst %,$(SRC_DIR)/%.c,$(TARGETS))
 INCS := $(wildcard $(INC_DIR)/*.h)
 OBJS := $(patsubst %,$(OBJ_DIR)/%.o,$(TARGETS))
 
-DEPENDENCIES =
+DEPENDENCIES = libmystupidmath libft
 
 CC := gcc
 CFLAGS_MORE =
