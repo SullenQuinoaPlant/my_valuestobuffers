@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdint.h>
 
+# define VTB_BIN_SYMS "ox"
 # define VTB_OCT_SYMS "01234567"
 # define VTB_DEC_SYMS "0123456789"
 # define VTB_HEX_SYMS "0123456789abcdef"

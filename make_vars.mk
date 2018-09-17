@@ -1,6 +1,6 @@
 NAME = myvaltobuffers
-LIBNAME = lib$(NAME)
-GIT_REPO =
+
+GIT_REPO = https://github.com/SullenQuinoaPlant/my_valuestobuffers.git
 
 CALL_DIR := $(shell pwd)
 SRC_DIR := $(ROOT)/sources
@@ -27,4 +27,4 @@ endif
 CFLAGS += $(CFLAGS_MORE)
 
 TEST_DIR := $(ROOT)/tests
-RELEAS_DIR := $(ROOT)/release
+RELEASE_DIR := $(ROOT)/release_vtb
