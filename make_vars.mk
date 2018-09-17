@@ -1,4 +1,5 @@
 NAME = myvaltobuffers
+LIBNAME = lib$(NAME)
 
 GIT_REPO = https://github.com/SullenQuinoaPlant/my_valuestobuffers.git
 
