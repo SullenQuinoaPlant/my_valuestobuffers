@@ -12,6 +12,7 @@
 
 #include "myvaltobuffers.h"
 
+t_s_vtb_bd const	g_vtb_bin = {VTB_BIN_SYMS, 2};
 t_s_vtb_bd const	g_vtb_oct = {VTB_OCT_SYMS, 8};
 t_s_vtb_bd const	g_vtb_dec = {VTB_DEC_SYMS, 10};
 t_s_vtb_bd const	g_vtb_hex = {VTB_HEX_SYMS, 16};
