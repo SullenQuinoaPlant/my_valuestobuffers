@@ -37,11 +37,11 @@ test_prerequisites : cmocka
 
 .PHONY : cmocka
 cmocka : 
-	@if $(CC) $(CFLAGS_UTEST)\
+	if $(CC) $(CFLAGS_UTEST)\
 		-I $(LIBS_I) -L $(LIBS_L)\
 	 	$(TEST_DIR)/cmocka/check_install.c\
 		-lcmocka_shared -o test.o\
-		-Wl,-rpath=$$(readlink -e $(LIBS_L))\
+		-Wl,-rpath,$(LIBS_L)\
 		&& ./test.o .;\
 	then\
 		echo "cmocka already installed";\
@@ -50,7 +50,6 @@ cmocka :
 		$(MAKE) -C $(TEST_DIR)/cmocka/;\
 	fi
 	-@rm ./test.o
-
 
 $(TEST_DIR)/%.test.o\
 :\
@@ -63,7 +62,7 @@ $(LIBS_L)/$(LIBNAME).a
 		-lcmocka_shared\
 		-l$(NAME) -lmystupidmath -lft\
 		-o $@\
-		-Wl,-rpath=$$(readlink -e $(LIBS_L))\
+		-Wl,-rpath,$(LIBS_L)\
 
 
 %.test.c : $(TEST_DIR)/cmocka/my_macro_overlay.h
