@@ -6,7 +6,7 @@
 /*   By: nmauvari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 15:15:59 by nmauvari          #+#    #+#             */
-/*   Updated: 2018/09/14 15:16:02 by nmauvari         ###   ########.fr       */
+/*   Updated: 2018/09/20 22:01:36 by nmauvari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ size_t							vtb_lv_raw(
 
 	log2 = my_flog2(r);
 	ijk[K] = (val_sz * CHAR_BIT) / log2;
-	mask = ~0 << log2;
+	mask = ~(uintmax_t)0 << log2;
 	ijk[I] = 0;
 	while (!(~mask & val) && (ijk[I] < ijk[K]))
 	{
